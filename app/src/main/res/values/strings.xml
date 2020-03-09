@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MyBolaSepak</string>
     <string name="step_counter">0 Step Today</string>
+    <string name="date_example">01 Januari 2020</string>
+    <string name="versus">vs</string>
+    <string name="zero">0</string>
 </resources>
