@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MyBolaSepak</string>
+    <string name="step_counter">0 Step Today</string>
 </resources>
