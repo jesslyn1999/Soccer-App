@@ -4,4 +4,9 @@
     <string name="date_example">01 Januari 2020</string>
     <string name="versus">vs</string>
     <string name="zero">0</string>
+    <string name="team_a">Team A</string>
+    <string name="team_b">Team B</string>
+    <string name="shot">Shot</string>
+    <string name="team_a_logo">team a logo</string>
+    <string name="team_b_logo">team b logo</string>
 </resources>
