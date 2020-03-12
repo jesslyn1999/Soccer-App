@@ -10,4 +10,7 @@
     <string name="team_a_logo">team a logo</string>
     <string name="team_b_logo">team b logo</string>
     <string name="goals">Goals</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
