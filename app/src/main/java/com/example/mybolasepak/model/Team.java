@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Team {
-    @SerializedName("idEvent")
+    @SerializedName("idTeam")
     private String id;
 
     private String soccerXML;
@@ -29,14 +29,25 @@ public class Team {
     private String strTeamJersey;
     private String strTeamLogo;
     private String strTeamBanner;
-
+    private EventList Last5EventList;
+    private EventList Next5EventList;
 
     private boolean subscribed;
 
     public String getStrTeam() { return this.strTeam; }
     public String getStrTeamBadge() { return (this.strTeamBadge + "/preview"); }
 
+    @Override
+    public String toString() {
+        return "Team{" +
+                "id='" + id + '\'' +
+                ", strTeam='" + strTeam + '\'' +
+                ", strAlternate='" + strAlternate + '\'' +
+                ", strTeamBadge='" + strTeamBadge + '\'' +
+                '}';
+    }
     public boolean getSubscribed() { return this.subscribed; }
     public void enableSubsc() { this.subscribed = true; }
     public void disableSubsc() { this.subscribed = false; }
 }
+

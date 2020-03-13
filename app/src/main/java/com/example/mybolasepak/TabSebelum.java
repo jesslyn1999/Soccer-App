@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mybolasepak.adapter.EventDetailAdapter;
+import com.example.mybolasepak.database.model.EventDbModel;
 import com.example.mybolasepak.model.Event;
 
 import java.util.ArrayList;
@@ -28,7 +29,7 @@ public class TabSebelum extends Fragment {
     private EventDetailAdapter adapter;
 
     // TODO: Rename and change types of parameters
-    private ArrayList<Event> events;
+    private ArrayList<EventDbModel> events;
 
     public TabSebelum() {
         // Required empty public constructor

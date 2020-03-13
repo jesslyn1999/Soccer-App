@@ -2,19 +2,31 @@ package com.example.mybolasepak.service.event;
 
 import android.util.Log;
 
-import com.example.mybolasepak.model.Event;
+import com.example.mybolasepak.database.model.EventDbModel;
 import com.example.mybolasepak.service.MainInterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 @AllArgsConstructor
-public class EventPresenterImpl implements MainInterface.presenter, MainInterface.GetIntractor.OnFinishedListener<Event> {
+@Data
+public class EventPresenterImpl implements MainInterface.presenter, MainInterface.GetIntractor.OnFinishedListener<EventDbModel> {
     private static final String TAG = "EventPresenterImpl";
 
-    private MainInterface.MainView<Event> mainView;
-    private MainInterface.GetIntractor<Event> getIntractor;
+    private MainInterface.MainView<EventDbModel> mainView;
+    private MainInterface.GetIntractor<EventDbModel> getIntractor;
+
+    private List<EventDbModel> eventDbModelList;
+
+    public EventPresenterImpl(MainInterface.MainView mainView, MainInterface.GetIntractor getIntractor) {
+        this.mainView = mainView;
+        this.getIntractor = getIntractor;
+        eventDbModelList = new ArrayList<>();
+    }
+
 
     @Override
     public void onDestroy() {
@@ -36,7 +48,8 @@ public class EventPresenterImpl implements MainInterface.presenter, MainInterfac
     }
 
     @Override
-    public void onFinished(ArrayList<Event> dataList) {
+    public void onFinished(ArrayList<EventDbModel> dataList) {
+        eventDbModelList = dataList;
         if (mainView != null) {
             mainView.setDataToRecyclerView(dataList);
             mainView.hideProgress();
@@ -45,9 +58,6 @@ public class EventPresenterImpl implements MainInterface.presenter, MainInterfac
 
     @Override
     public void onFailure(Throwable t) {
-        if (mainView != null) {
-            mainView.onResponseFailure(t);
-            mainView.hideProgress();
-        }
+        Log.e(TAG, "Error in onFailure while requesting data from server");
     }
 }

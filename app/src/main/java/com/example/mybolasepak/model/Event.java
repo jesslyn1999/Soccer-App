@@ -10,7 +10,6 @@ import java.io.Serializable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.NonNull;
 
 @AllArgsConstructor
 @Data
@@ -128,25 +127,5 @@ public class Event implements Parcelable {
                 ", idAwayTeam='" + idAwayTeam + '\'' +
                 ", strAwayTeam='" + strAwayTeam + '\'' +
                 '}';
-    }
-
-    public String getStrHomeTeam() {
-        return strHomeTeam;
-    }
-
-    public String getIntHomeScore() {
-        return intHomeScore;
-    }
-
-    public String getStrAwayTeam() {
-        return strAwayTeam;
-    }
-
-    public String getIntAwayScore() {
-        return intAwayScore;
-    }
-
-    public String getDateEvent() {
-        return dateEvent;
     }
 }

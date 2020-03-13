@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mybolasepak.adapter.EventDetailAdapter;
+import com.example.mybolasepak.database.model.EventDbModel;
 import com.example.mybolasepak.model.Event;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public class TabSekarang extends Fragment {
     private RecyclerView recyclerView;
     private EventDetailAdapter adapter;
 
-    private ArrayList<Event> events;
+    private ArrayList<EventDbModel> events;
 
     public TabSekarang() {
         // Required empty public constructor

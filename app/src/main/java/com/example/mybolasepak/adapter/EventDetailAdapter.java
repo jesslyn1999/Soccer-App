@@ -3,21 +3,32 @@ package com.example.mybolasepak.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.mybolasepak.R;
-import com.example.mybolasepak.model.Event;
+import com.example.mybolasepak.database.model.EventDbModel;
+import com.example.mybolasepak.utils.LoadImage;
 
-import java.util.ArrayList;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.Locale;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.EventDetailViewHolder> {
 
-    private ArrayList<Event> dataList;
+    private List<EventDbModel> dataList;
 
-    public EventDetailAdapter(ArrayList<Event> dataList) {
+    public EventDetailAdapter(List<EventDbModel> dataList) {
         this.dataList = dataList;
     }
 
@@ -31,11 +42,19 @@ public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.
 
     @Override
     public void onBindViewHolder(EventDetailViewHolder holder, int position) {
-        holder.txtDateEvent.setText(dataList.get(position).getDateEvent());
-        holder.txtNameTeamA.setText(dataList.get(position).getStrHomeTeam());
-        holder.txtNameTeamB.setText(dataList.get(position).getStrAwayTeam());
-        holder.txtScoreTeamA.setText(dataList.get(position).getIntHomeScore());
-        holder.txtScoreTeamB.setText(dataList.get(position).getIntAwayScore());
+        EventDbModel event = dataList.get(position);
+        DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("in"));
+        Glide.with(holder.itemView.getContext())
+                .load(LoadImage.decodeDrawable(holder.itemView.getContext(), event.getHomeTeam().getBase64TeamBadge()))
+                .into(holder.imageTeamA);
+        Glide.with(holder.itemView.getContext())
+                .load(LoadImage.decodeDrawable(holder.itemView.getContext(), event.getAwayTeam().getBase64TeamBadge()))
+                .into(holder.imageTeamB);
+        holder.dateEventDetail.setText(dateFormat.format(event.getDateEvent()));
+        holder.textNameTeamA.setText(event.getHomeTeam().getName());
+        holder.textNameTeamB.setText(event.getAwayTeam().getName());
+        holder.scoreTeamA.setText(String.valueOf(event.getHomeScore()));
+        holder.scoreTeamB.setText(String.valueOf(event.getAwayScore()));
     }
 
     @Override
@@ -43,16 +62,26 @@ public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.
         return (dataList != null) ? dataList.size() : 0;
     }
 
-    public class EventDetailViewHolder extends RecyclerView.ViewHolder{
-        private TextView txtDateEvent, txtNameTeamA, txtNameTeamB,txtScoreTeamA,txtScoreTeamB;
+    public class EventDetailViewHolder extends RecyclerView.ViewHolder {
+
+        @BindView(R.id.date_event_detail)
+        TextView dateEventDetail;
+        @BindView(R.id.image_team_a)
+        ImageView imageTeamA;
+        @BindView(R.id.text_name_team_a)
+        TextView textNameTeamA;
+        @BindView(R.id.score_team_a)
+        TextView scoreTeamA;
+        @BindView(R.id.score_team_b)
+        TextView scoreTeamB;
+        @BindView(R.id.image_team_b)
+        ImageView imageTeamB;
+        @BindView(R.id.text_name_team_b)
+        TextView textNameTeamB;
 
         public EventDetailViewHolder(View itemView) {
             super(itemView);
-            txtDateEvent = (TextView) itemView.findViewById(R.id.date_event_detail);
-            txtNameTeamA = (TextView) itemView.findViewById(R.id.text_name_team_a);
-            txtNameTeamB = (TextView) itemView.findViewById(R.id.text_name_team_b);
-            txtScoreTeamA = (TextView) itemView.findViewById(R.id.score_team_a);
-            txtScoreTeamB = (TextView) itemView.findViewById(R.id.score_team_b);
+            ButterKnife.bind(this, itemView);
         }
     }
 

@@ -1,5 +1,7 @@
 package com.example.mybolasepak.model;
 
+import com.example.mybolasepak.database.model.TeamDbModel;
+
 import java.util.ArrayList;
 
 import lombok.AllArgsConstructor;
@@ -10,5 +12,5 @@ import lombok.Data;
 @Data
 @Builder
 public class TeamList {
-    private ArrayList<Team> teams;
+    private ArrayList<TeamDbModel> teams;
 }
