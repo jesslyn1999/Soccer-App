@@ -28,11 +28,11 @@ public interface MainInterface {
     /**
      * Intractors are classes built for fetching data from your database, web services, or any other data source.
      **/
-    interface GetIntractor {
+    interface GetIntractor<T> {
         interface OnFinishedListener<T> {
             void onFinished(ArrayList<T> dataList);
             void onFailure(Throwable t);
         }
-        void getDataList(OnFinishedListener onFinishedListener);
+        void getDataList(OnFinishedListener<T> onFinishedListener);
     }
 }

@@ -12,8 +12,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.mybolasepak.service.EventGetIntractorsImpl;
-import com.example.mybolasepak.service.EventPresenterImpl;
+import com.example.mybolasepak.service.event.EventGetIntractorsImpl;
+import com.example.mybolasepak.service.event.EventPresenterImpl;
 import com.example.mybolasepak.service.MainInterface;
 import com.example.mybolasepak.service.step.StepDetector;
 import com.example.mybolasepak.service.step.StepListener;

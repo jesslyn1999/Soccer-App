@@ -1,6 +1,7 @@
 package com.example.mybolasepak.api;
 
 import com.example.mybolasepak.model.EventList;
+import com.example.mybolasepak.model.TeamList;
 
 import retrofit2.Call;
 import retrofit2.http.GET;
@@ -10,7 +11,7 @@ public interface RetrofitServiceInterface {
     Call<EventList> getEventListById();
 
     @GET("v1/json/1/lookupteam.php?id=133604")
-    Call<EventList> getTeamListById();
+    Call<TeamList> getTeamListById();
 
     @GET("v1/json/1/eventsnext.php?id=133602")
     Call<EventList> getNext5EventListByTeamId();
