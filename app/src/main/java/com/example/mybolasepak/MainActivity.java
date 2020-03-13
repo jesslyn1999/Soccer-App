@@ -1,6 +1,8 @@
 package com.example.mybolasepak;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -12,8 +14,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.mybolasepak.adapter.EventDetailAdapter;
+import com.example.mybolasepak.model.Event;
 import com.example.mybolasepak.service.step.StepDetector;
 import com.example.mybolasepak.service.step.StepListener;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +27,9 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
     private StepDetector simpleStepDetector;
     private int numSteps = 0;
+    private ArrayList<Event> dataList;
+    private RecyclerView recyclerView;
+    private EventDetailAdapter adapter;
 
     @BindView(R.id.step_counter)
     TextView tvStepCount;
@@ -35,6 +44,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+
+        recyclerView = (RecyclerView) findViewById(R.id.list_of_match);
+        adapter = new EventDetailAdapter(dataList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
+        recyclerView.setLayoutManager(layoutManager);
+
+        recyclerView.setAdapter(adapter);
 
         // Get an instance of the SensorManager
         SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
