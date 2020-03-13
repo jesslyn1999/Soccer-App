@@ -44,7 +44,7 @@ public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.
     }
 
     public class EventDetailViewHolder extends RecyclerView.ViewHolder{
-        private TextView txtDateEvent, txtNameTeamA, txtNameTeamB,txtScoreTeamA,txtScoreTeamB,;
+        private TextView txtDateEvent, txtNameTeamA, txtNameTeamB,txtScoreTeamA,txtScoreTeamB;
 
         public EventDetailViewHolder(View itemView) {
             super(itemView);

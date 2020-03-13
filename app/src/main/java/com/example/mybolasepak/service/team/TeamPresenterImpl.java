@@ -1,16 +1,18 @@
-package com.example.mybolasepak.service;
+package com.example.mybolasepak.service.team;
 
-import com.example.mybolasepak.model.EventList;
+import android.util.Log;
+
+import com.example.mybolasepak.model.Team;
+import com.example.mybolasepak.service.MainInterface;
 
 import java.util.ArrayList;
 
-import lombok.AllArgsConstructor;
+public class TeamPresenterImpl implements MainInterface.presenter, MainInterface.GetIntractor.OnFinishedListener<Team> {
 
-@AllArgsConstructor
-public class EventPresenterImpl implements MainContract.presenter, MainContract.GetIntractor.OnFinishedListener<EventList> {
+    private static final String TAG = "TeamPresenterImpl";
 
-    private MainContract.MainView<EventList> mainView;
-    private MainContract.GetIntractor getIntractor;
+    private MainInterface.MainView<Team> mainView;
+    private MainInterface.GetIntractor<Team> getIntractor;
 
     @Override
     public void onDestroy() {
@@ -27,11 +29,12 @@ public class EventPresenterImpl implements MainContract.presenter, MainContract.
 
     @Override
     public void requestDataFromServer() {
+        Log.i(TAG, "Start Executing RequestDataFrom Server");
         getIntractor.getDataList(this);
     }
 
     @Override
-    public void onFinished(ArrayList<EventList> dataList) {
+    public void onFinished(ArrayList<Team> dataList) {
         if (mainView != null) {
             mainView.setDataToRecyclerView(dataList);
             mainView.hideProgress();

@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NonNull;
 
 @AllArgsConstructor
 @Data
@@ -37,6 +38,9 @@ public class Event {
 
     private String dateEvent;  // TT-MM-DD
     private String strTime;
+
+    private Team awayTeam;
+    private Team homeTeam;
 
     @Override
     public String toString() {

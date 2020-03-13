@@ -16,6 +16,9 @@ import android.widget.TextView;
 
 import com.example.mybolasepak.adapter.EventDetailAdapter;
 import com.example.mybolasepak.model.Event;
+import com.example.mybolasepak.service.event.EventGetIntractorsImpl;
+import com.example.mybolasepak.service.event.EventPresenterImpl;
+import com.example.mybolasepak.service.MainInterface;
 import com.example.mybolasepak.service.step.StepDetector;
 import com.example.mybolasepak.service.step.StepListener;
 
@@ -24,12 +27,8 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
-    private StepDetector simpleStepDetector;
-    private int numSteps = 0;
-    private ArrayList<Event> dataList;
-    private RecyclerView recyclerView;
-    private EventDetailAdapter adapter;
+    
+public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener, MainInterface.MainView {
 
     @BindView(R.id.step_counter)
     TextView tvStepCount;
@@ -37,6 +36,13 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     Button BtnStart;
     @BindView(R.id.btn_stop)
     Button BtnStop;
+
+    private StepDetector simpleStepDetector;
+    private int numSteps = 0;
+    private MainInterface.presenter presenter;
+    private ArrayList<Event> dataList;
+    private RecyclerView recyclerView;
+    private EventDetailAdapter adapter;
 
 
     @Override
@@ -74,6 +80,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             }
         });
+
+        presenter = new EventPresenterImpl(this, new EventGetIntractorsImpl());
+        presenter.requestDataFromServer();
     }
 
     @Override
@@ -92,5 +101,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void step(long timeNs) {
         numSteps++;
         tvStepCount.setText(numSteps + " Step Today");
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void setDataToRecyclerView(ArrayList DataList) {
+
+    }
+
+    @Override
+    public void onResponseFailure(Throwable throwable) {
+
     }
 }
