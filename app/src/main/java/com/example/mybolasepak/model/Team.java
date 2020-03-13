@@ -30,7 +30,7 @@ public class Team {
     private String strTeamLogo;
     private String strTeamBanner;
 
-{
+
     private boolean subscribed;
 
     public String getStrTeam() { return this.strTeam; }

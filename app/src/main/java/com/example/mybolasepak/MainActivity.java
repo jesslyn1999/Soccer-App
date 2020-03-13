@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         adapter = new EventDetailAdapter(dataList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
-
         recyclerView.setAdapter(adapter);
 
         // Get an instance of the SensorManager
