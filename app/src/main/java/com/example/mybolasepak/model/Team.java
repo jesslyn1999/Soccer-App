@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Builder
 public class Team {
-    @SerializedName("idTeam")
+    @SerializedName("idEvent")
     private String id;
 
     private String soccerXML;
@@ -30,6 +30,7 @@ public class Team {
     private String strTeamLogo;
     private String strTeamBanner;
 
+{
     private boolean subscribed;
 
     public String getStrTeam() { return this.strTeam; }
