@@ -33,7 +33,6 @@ public class Team {
     private boolean subscribed;
 
     public String getStrTeam() { return this.strTeam; }
-
     public String getStrTeamBadge() { return (this.strTeamBadge + "/preview"); }
 
     public boolean getSubscribed() { return this.subscribed; }
