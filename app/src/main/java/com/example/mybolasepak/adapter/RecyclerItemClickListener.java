@@ -1,6 +1,6 @@
 package com.example.mybolasepak.adapter;
 
-import com.example.mybolasepak.model.Event;
+import com.example.mybolasepak.modellist.Event;
 
 public interface RecyclerItemClickListener {
     void onItemClick(Event event);

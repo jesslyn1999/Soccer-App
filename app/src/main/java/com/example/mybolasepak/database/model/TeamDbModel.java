@@ -32,6 +32,9 @@ public class TeamDbModel {
     @NotNull
     private String base64TeamBadge;
 
+    @SerializedName("strStadiumLocation")
+    private String stadiumLocation;
+
     @ToMany(referencedJoinProperty = "homeTeamId")
     private List<EventDbModel> homeTeamEvents;
     @ToMany(referencedJoinProperty = "awayTeamId")
@@ -45,13 +48,14 @@ public class TeamDbModel {
     @Generated(hash = 1513918748)
     private transient TeamDbModelDao myDao;
 
-    @Generated(hash = 2010122707)
+    @Generated(hash = 669075475)
     public TeamDbModel(long id, @NotNull String name, @NotNull String urlTeamBadge,
-            @NotNull String base64TeamBadge) {
+            @NotNull String base64TeamBadge, String stadiumLocation) {
         this.id = id;
         this.name = name;
         this.urlTeamBadge = urlTeamBadge;
         this.base64TeamBadge = base64TeamBadge;
+        this.stadiumLocation = stadiumLocation;
     }
 
     @Generated(hash = 434480944)
@@ -64,6 +68,7 @@ public class TeamDbModel {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", urlTeamBadge='" + urlTeamBadge + '\'' +
+                ", stadiumLocation='" + stadiumLocation + '\'' +
                 '}';
     }
 
@@ -97,6 +102,14 @@ public class TeamDbModel {
 
     public void setBase64TeamBadge(String base64TeamBadge) {
         this.base64TeamBadge = base64TeamBadge;
+    }
+
+    public String getStadiumLocation() {
+        return this.stadiumLocation;
+    }
+
+    public void setStadiumLocation(String stadiumLocation) {
+        this.stadiumLocation = stadiumLocation;
     }
 
     /**

@@ -2,7 +2,7 @@ package com.example.mybolasepak.service.team;
 
 import android.util.Log;
 
-import com.example.mybolasepak.model.Team;
+import com.example.mybolasepak.modellist.Team;
 import com.example.mybolasepak.service.MainInterface;
 
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.mybolasepak.model;
+package com.example.mybolasepak.modellist;
 
 import com.example.mybolasepak.database.model.TeamDbModel;
 

@@ -14,9 +14,13 @@ import java.util.Date;
 import org.greenrobot.greendao.annotation.Generated;
 import org.greenrobot.greendao.annotation.ToOne;
 import org.greenrobot.greendao.DaoException;
+import org.greenrobot.greendao.annotation.Transient;
+
+import lombok.Data;
 
 
 @Entity
+@Data
 public class EventDbModel implements Parcelable {
 
     @Id
@@ -31,43 +35,63 @@ public class EventDbModel implements Parcelable {
     @SerializedName("idHomeTeam")
     private long homeTeamId;
 
+    @NotNull
+    @SerializedName("idAwayTeam")
+    private long awayTeamId;
+
+    private Long weatherId;
+
     @SerializedName("intHomeScore")
     private int homeScore;
     @SerializedName("intHomeShots")
     private int homeShots;
-
-    @NotNull
-    @SerializedName("idAwayTeam")
-    private long awayTeamId;
+    @SerializedName("strHomeGoalDetails")
+    private String homeGoals;
 
     @SerializedName("intAwayScore")
     private int awayScore;
     @SerializedName("intAwayShots")
     private int awayShots;
+    @SerializedName("strAwayGoalDetails")
+    private String awayGoals;
+
+    @SerializedName("strCity")
+    private String location;
 
     @NotNull
+    private Date datetimeEvent;
+
     @SerializedName("dateEvent")
-    private Date dateEvent;
+    @Transient
+    private String dateEventText;
+
+    @SerializedName(value = "strTimeLocal", alternate = "strTime")
+    @Transient
+    private String timeEventText;
 
     @ToOne(joinProperty = "homeTeamId")
     private TeamDbModel homeTeam;
     @ToOne(joinProperty = "awayTeamId")
     private TeamDbModel awayTeam;
 
+    @ToOne(joinProperty = "weatherId")
+    private Weather weather;
+
     @Override
     public String toString() {
         return "EventDbModel{" +
-                "Id=" + id +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", homeTeamId=" + homeTeamId +
+                ", awayTeamId=" + awayTeamId +
                 ", homeScore=" + homeScore +
                 ", homeShots=" + homeShots +
-                ", awayTeamId=" + awayTeamId +
+                ", homeGoals=" + homeGoals +
                 ", awayScore=" + awayScore +
                 ", awayShots=" + awayShots +
-                ", dateEvent=" + dateEvent +
-                ", homeTeam=" + homeTeam +
-                ", awayTeam=" + awayTeam +
+                ", awayGoals=" + awayGoals +
+                ", location='" + location + '\'' +
+                ", dateEvent=" + datetimeEvent +
                 '}';
     }
 
@@ -81,12 +105,18 @@ public class EventDbModel implements Parcelable {
         dest.writeLong(this.id);
         dest.writeString(this.name);
         dest.writeLong(this.homeTeamId);
+        dest.writeLong(this.awayTeamId);
+        dest.writeValue(this.weatherId);
         dest.writeInt(this.homeScore);
         dest.writeInt(this.homeShots);
-        dest.writeLong(this.awayTeamId);
+        dest.writeString(this.homeGoals);
         dest.writeInt(this.awayScore);
         dest.writeInt(this.awayShots);
-        dest.writeLong(this.dateEvent != null ? this.dateEvent.getTime() : -1);
+        dest.writeString(this.awayGoals);
+        dest.writeString(this.location);
+        dest.writeLong(this.datetimeEvent != null ? this.datetimeEvent.getTime() : -1);
+        dest.writeString(this.dateEventText);
+        dest.writeString(this.timeEventText);
     }
 
     public long getId() {
@@ -113,6 +143,22 @@ public class EventDbModel implements Parcelable {
         this.homeTeamId = homeTeamId;
     }
 
+    public long getAwayTeamId() {
+        return this.awayTeamId;
+    }
+
+    public void setAwayTeamId(long awayTeamId) {
+        this.awayTeamId = awayTeamId;
+    }
+
+    public Long getWeatherId() {
+        return this.weatherId;
+    }
+
+    public void setWeatherId(Long weatherId) {
+        this.weatherId = weatherId;
+    }
+
     public int getHomeScore() {
         return this.homeScore;
     }
@@ -129,12 +175,12 @@ public class EventDbModel implements Parcelable {
         this.homeShots = homeShots;
     }
 
-    public long getAwayTeamId() {
-        return this.awayTeamId;
+    public String getHomeGoals() {
+        return this.homeGoals;
     }
 
-    public void setAwayTeamId(long awayTeamId) {
-        this.awayTeamId = awayTeamId;
+    public void setHomeGoals(String homeGoals) {
+        this.homeGoals = homeGoals;
     }
 
     public int getAwayScore() {
@@ -153,12 +199,28 @@ public class EventDbModel implements Parcelable {
         this.awayShots = awayShots;
     }
 
-    public Date getDateEvent() {
-        return this.dateEvent;
+    public String getAwayGoals() {
+        return this.awayGoals;
     }
 
-    public void setDateEvent(Date dateEvent) {
-        this.dateEvent = dateEvent;
+    public void setAwayGoals(String awayGoals) {
+        this.awayGoals = awayGoals;
+    }
+
+    public String getLocation() {
+        return this.location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Date getDatetimeEvent() {
+        return this.datetimeEvent;
+    }
+
+    public void setDatetimeEvent(Date datetimeEvent) {
+        this.datetimeEvent = datetimeEvent;
     }
 
     /** To-one relationship, resolved on first access. */
@@ -227,6 +289,35 @@ public class EventDbModel implements Parcelable {
         }
     }
 
+    /** To-one relationship, resolved on first access. */
+    @Generated(hash = 1385378199)
+    public Weather getWeather() {
+        Long __key = this.weatherId;
+        if (weather__resolvedKey == null || !weather__resolvedKey.equals(__key)) {
+            final DaoSession daoSession = this.daoSession;
+            if (daoSession == null) {
+                throw new DaoException("Entity is detached from DAO context");
+            }
+            WeatherDao targetDao = daoSession.getWeatherDao();
+            Weather weatherNew = targetDao.load(__key);
+            synchronized (this) {
+                weather = weatherNew;
+                weather__resolvedKey = __key;
+            }
+        }
+        return weather;
+    }
+
+    /** called by internal mechanisms, do not call yourself. */
+    @Generated(hash = 746082110)
+    public void setWeather(Weather weather) {
+        synchronized (this) {
+            this.weather = weather;
+            weatherId = weather == null ? null : weather.getId();
+            weather__resolvedKey = weatherId;
+        }
+    }
+
     /**
      * Convenient call for {@link org.greenrobot.greendao.AbstractDao#delete(Object)}.
      * Entity must attached to an entity context.
@@ -270,35 +361,49 @@ public class EventDbModel implements Parcelable {
         myDao = daoSession != null ? daoSession.getEventDbModelDao() : null;
     }
 
-    public EventDbModel() {
-    }
-
     protected EventDbModel(Parcel in) {
         this.id = in.readLong();
         this.name = in.readString();
         this.homeTeamId = in.readLong();
+        this.awayTeamId = in.readLong();
+        this.weatherId = (Long) in.readValue(Long.class.getClassLoader());
         this.homeScore = in.readInt();
         this.homeShots = in.readInt();
-        this.awayTeamId = in.readLong();
+        this.homeGoals = in.readString();
         this.awayScore = in.readInt();
         this.awayShots = in.readInt();
-        long tmpDateEvent = in.readLong();
-        this.dateEvent = tmpDateEvent == -1 ? null : new Date(tmpDateEvent);
+        this.awayGoals = in.readString();
+        this.location = in.readString();
+        long tmpDatetimeEvent = in.readLong();
+        this.datetimeEvent = tmpDatetimeEvent == -1 ? null : new Date(tmpDatetimeEvent);
+        this.dateEventText = in.readString();
+        this.timeEventText = in.readString();
+        this.homeTeam = in.readParcelable(TeamDbModel.class.getClassLoader());
+        this.awayTeam = in.readParcelable(TeamDbModel.class.getClassLoader());
+        this.weather = in.readParcelable(Weather.class.getClassLoader());
     }
 
-    @Generated(hash = 1616430694)
-    public EventDbModel(long id, @NotNull String name, long homeTeamId, int homeScore,
-            int homeShots, long awayTeamId, int awayScore, int awayShots,
-            @NotNull Date dateEvent) {
+    @Generated(hash = 1045103894)
+    public EventDbModel(long id, @NotNull String name, long homeTeamId, long awayTeamId,
+            Long weatherId, int homeScore, int homeShots, String homeGoals, int awayScore,
+            int awayShots, String awayGoals, String location, @NotNull Date datetimeEvent) {
         this.id = id;
         this.name = name;
         this.homeTeamId = homeTeamId;
+        this.awayTeamId = awayTeamId;
+        this.weatherId = weatherId;
         this.homeScore = homeScore;
         this.homeShots = homeShots;
-        this.awayTeamId = awayTeamId;
+        this.homeGoals = homeGoals;
         this.awayScore = awayScore;
         this.awayShots = awayShots;
-        this.dateEvent = dateEvent;
+        this.awayGoals = awayGoals;
+        this.location = location;
+        this.datetimeEvent = datetimeEvent;
+    }
+
+    @Generated(hash = 1189926993)
+    public EventDbModel() {
     }
 
     public static final Creator<EventDbModel> CREATOR = new Creator<EventDbModel>() {
@@ -326,4 +431,7 @@ public class EventDbModel implements Parcelable {
 
     @Generated(hash = 1934993098)
     private transient Long awayTeam__resolvedKey;
+
+    @Generated(hash = 665441540)
+    private transient Long weather__resolvedKey;
 }

@@ -58,6 +58,6 @@ public class EventPresenterImpl implements MainInterface.presenter, MainInterfac
 
     @Override
     public void onFailure(Throwable t) {
-        Log.e(TAG, "Error in onFailure while requesting data from server");
+        Log.e(TAG, "Error in onFailure while requesting data from server", t);
     }
 }

@@ -7,10 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.mybolasepak.api.RetrofitClientApi;
 import com.example.mybolasepak.api.RetrofitServiceInterface;
 import com.example.mybolasepak.database.model.EventDbModel;
-import com.example.mybolasepak.database.model.TeamDbModel;
-import com.example.mybolasepak.model.Event;
-import com.example.mybolasepak.model.EventList;
-import com.example.mybolasepak.model.TeamList;
+import com.example.mybolasepak.modellist.EventList;
 import com.example.mybolasepak.service.MainInterface;
 
 import java.util.ArrayList;
@@ -25,7 +22,7 @@ public class EventGetIntractorsImpl implements MainInterface.GetIntractor<EventD
 
     @Override
     public void getDataList(OnFinishedListener<EventDbModel> onFinishedListener) {
-        RetrofitServiceInterface service = RetrofitClientApi.getInstance().create(RetrofitServiceInterface.class);
+        RetrofitServiceInterface service = RetrofitClientApi.getSportDbInstance().create(RetrofitServiceInterface.class);
         Call<EventList> callNextEvents = service.getNext15EventListByLeagueId();
         Call<EventList> callLastEvents = service.getLast15EventListByLeagueId();
         Log.i(TAG, "Start executing getDataList with next_request_url=" +

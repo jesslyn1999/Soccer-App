@@ -1,11 +1,9 @@
-package com.example.mybolasepak.model;
+package com.example.mybolasepak.modellist;
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
-
-import java.io.Serializable;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -128,4 +126,54 @@ public class Event implements Parcelable {
                 ", strAwayTeam='" + strAwayTeam + '\'' +
                 '}';
     }
+
+
+
+//    @Id
+//    @SerializedName("idEvent")
+//    private long id;
+//
+//    @NotNull
+//    @SerializedName("strEvent")
+//    private String name;
+//
+//    @NotNull
+//    @SerializedName("idHomeTeam")
+//    private long homeTeamId;
+//
+//    @NotNull
+//    @SerializedName("idAwayTeam")
+//    private long awayTeamId;
+//
+//    @SerializedName("intHomeScore")
+//    private int homeScore;
+//    @SerializedName("intHomeShots")
+//    private int homeShots;
+//    @SerializedName("strHomeGoalDetails")
+//    private int homeGoals;
+//
+//    @SerializedName("intAwayScore")
+//    private int awayScore;
+//    @SerializedName("intAwayShots")
+//    private int awayShots;
+//    @SerializedName("strAwayGoalDetails")
+//    private int awayGoals;
+//
+//    @SerializedName("strCity")
+//    private String location;
+//
+//    @NotNull
+//    @SerializedName("dateEvent")
+//    private Date dateEvent;
+//
+//    @NotNull
+//    @SerializedName(value = "strTimeLocal", alternate = "strTime")
+//    private String timeEvent;
+//
+//    @ToOne(joinProperty = "homeTeamId")
+//    private TeamDbModel homeTeam;
+//    @ToOne(joinProperty = "awayTeamId")
+//    private TeamDbModel awayTeam;
+//
+//    private String outlook;
 }

@@ -1,9 +1,8 @@
-package com.example.mybolasepak.model;
+package com.example.mybolasepak.modellist;
 
 import com.example.mybolasepak.database.model.EventDbModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

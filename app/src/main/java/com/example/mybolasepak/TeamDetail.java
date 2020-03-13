@@ -7,7 +7,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 
 import com.example.mybolasepak.adapter.ViewPagerAdapter;
-import com.example.mybolasepak.model.Event;
+import com.example.mybolasepak.modellist.Event;
 import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;

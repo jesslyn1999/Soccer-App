@@ -1,23 +1,25 @@
 package com.example.mybolasepak.adapter;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.example.mybolasepak.R;
 import com.example.mybolasepak.database.model.EventDbModel;
 import com.example.mybolasepak.utils.LoadImage;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -26,10 +28,13 @@ import butterknife.ButterKnife;
 
 public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.EventDetailViewHolder> {
 
+    private static final String TAG = "EventDetailAdapter";
     private List<EventDbModel> dataList;
+    private List<EventDbModel> filteredDataList;
 
     public EventDetailAdapter(List<EventDbModel> dataList) {
         this.dataList = dataList;
+        filteredDataList = dataList;
     }
 
     @NonNull
@@ -42,7 +47,7 @@ public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.
 
     @Override
     public void onBindViewHolder(EventDetailViewHolder holder, int position) {
-        EventDbModel event = dataList.get(position);
+        EventDbModel event = filteredDataList.get(position);
         DateFormat dateFormat = new SimpleDateFormat("dd MMMM yyyy", new Locale("in"));
         Glide.with(holder.itemView.getContext())
                 .load(LoadImage.decodeDrawable(holder.itemView.getContext(), event.getHomeTeam().getBase64TeamBadge()))
@@ -50,7 +55,7 @@ public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.
         Glide.with(holder.itemView.getContext())
                 .load(LoadImage.decodeDrawable(holder.itemView.getContext(), event.getAwayTeam().getBase64TeamBadge()))
                 .into(holder.imageTeamB);
-        holder.dateEventDetail.setText(dateFormat.format(event.getDateEvent()));
+        holder.dateEventDetail.setText(dateFormat.format(event.getDatetimeEvent()));
         holder.textNameTeamA.setText(event.getHomeTeam().getName());
         holder.textNameTeamB.setText(event.getAwayTeam().getName());
         holder.scoreTeamA.setText(String.valueOf(event.getHomeScore()));
@@ -59,7 +64,7 @@ public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.
 
     @Override
     public int getItemCount() {
-        return (dataList != null) ? dataList.size() : 0;
+        return (filteredDataList != null) ? filteredDataList.size() : 0;
     }
 
     public class EventDetailViewHolder extends RecyclerView.ViewHolder {

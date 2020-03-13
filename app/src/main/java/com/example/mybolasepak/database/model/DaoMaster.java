@@ -23,12 +23,14 @@ public class DaoMaster extends AbstractDaoMaster {
     public static void createAllTables(Database db, boolean ifNotExists) {
         EventDbModelDao.createTable(db, ifNotExists);
         TeamDbModelDao.createTable(db, ifNotExists);
+        WeatherDao.createTable(db, ifNotExists);
     }
 
     /** Drops underlying database table using DAOs. */
     public static void dropAllTables(Database db, boolean ifExists) {
         EventDbModelDao.dropTable(db, ifExists);
         TeamDbModelDao.dropTable(db, ifExists);
+        WeatherDao.dropTable(db, ifExists);
     }
 
     /**
@@ -49,6 +51,7 @@ public class DaoMaster extends AbstractDaoMaster {
         super(db, SCHEMA_VERSION);
         registerDaoClass(EventDbModelDao.class);
         registerDaoClass(TeamDbModelDao.class);
+        registerDaoClass(WeatherDao.class);
     }
 
     public DaoSession newSession() {

@@ -10,10 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.mybolasepak.R;
-import com.example.mybolasepak.model.Event;
-import com.example.mybolasepak.utils.LoadImage;
+import com.example.mybolasepak.modellist.Event;
 
 import java.util.List;
 

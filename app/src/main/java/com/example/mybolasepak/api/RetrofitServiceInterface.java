@@ -1,15 +1,19 @@
 package com.example.mybolasepak.api;
 
-import com.example.mybolasepak.model.EventList;
-import com.example.mybolasepak.model.Event;
-import com.example.mybolasepak.model.TeamList;
-import com.example.mybolasepak.model.Team;
+import com.example.mybolasepak.modellist.EventList;
+import com.example.mybolasepak.modellist.ResponseWeather;
+import com.example.mybolasepak.modellist.TeamList;
+import com.example.mybolasepak.modellist.Team;
 
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
+
 public interface RetrofitServiceInterface {
+    /**************  Sport DB API  ***************/
     @GET("v1/json/1/lookupevent.php")
     Call<EventList> getEventById(@Query("id") String eventID);
 
@@ -27,6 +31,17 @@ public interface RetrofitServiceInterface {
 
     @GET("v1/json/1/eventspastleague.php?id=4328")
     Call<EventList> getLast15EventListByLeagueId();
+
+
+    /**************  Open Weather API  ***************/
+    @GET("data/2.5/forecast?lang=id&appid=0dbb99a65ac022097cb23364f56745f1")
+    Call<ResponseWeather> getWeatherByCountry(@Query("q") String city);
+
+
+    /**************  Open Weather  ***************/
+    @GET("img/wn/{id}@2x.png")
+    Call<ResponseBody> getIconPng(@Path("id") String id);  // id = 10d
+
 
 //    @GET("v1/json/1/lookupevent.php")
 //    Call<EventList> getEventListById(@Query("id") String id);  // id=441613

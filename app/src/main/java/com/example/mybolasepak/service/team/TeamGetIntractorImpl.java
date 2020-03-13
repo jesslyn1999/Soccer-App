@@ -4,12 +4,10 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.example.mybolasepak.GreenDaoApp;
 import com.example.mybolasepak.api.RetrofitClientApi;
 import com.example.mybolasepak.api.RetrofitServiceInterface;
 import com.example.mybolasepak.database.model.TeamDbModel;
-import com.example.mybolasepak.model.Team;
-import com.example.mybolasepak.model.TeamList;
+import com.example.mybolasepak.modellist.TeamList;
 import com.example.mybolasepak.service.MainInterface;
 
 import java.util.ArrayList;
@@ -24,7 +22,7 @@ public class TeamGetIntractorImpl implements MainInterface.GetIntractor<TeamDbMo
 
     @Override
     public void getDataList(MainInterface.GetIntractor.OnFinishedListener<TeamDbModel> onFinishedListener) {
-        RetrofitServiceInterface service = RetrofitClientApi.getInstance().create(RetrofitServiceInterface.class);
+        RetrofitServiceInterface service = RetrofitClientApi.getSportDbInstance().create(RetrofitServiceInterface.class);
         Call<TeamList> call = service.getTeamListById(150);
         Log.i(TAG, "Start executing getDataList with request_url=" + call.request().url());
 

@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.mybolasepak.adapter.EventDetailAdapter;
 import com.example.mybolasepak.database.model.EventDbModel;
-import com.example.mybolasepak.model.Event;
+import com.example.mybolasepak.modellist.Event;
 
 import java.util.ArrayList;
 

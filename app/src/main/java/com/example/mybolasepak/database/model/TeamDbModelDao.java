@@ -26,6 +26,7 @@ public class TeamDbModelDao extends AbstractDao<TeamDbModel, Long> {
         public final static Property Name = new Property(1, String.class, "name", false, "NAME");
         public final static Property UrlTeamBadge = new Property(2, String.class, "urlTeamBadge", false, "URL_TEAM_BADGE");
         public final static Property Base64TeamBadge = new Property(3, String.class, "base64TeamBadge", false, "BASE64_TEAM_BADGE");
+        public final static Property StadiumLocation = new Property(4, String.class, "stadiumLocation", false, "STADIUM_LOCATION");
     }
 
     private DaoSession daoSession;
@@ -47,7 +48,8 @@ public class TeamDbModelDao extends AbstractDao<TeamDbModel, Long> {
                 "\"_id\" INTEGER PRIMARY KEY NOT NULL ," + // 0: id
                 "\"NAME\" TEXT NOT NULL ," + // 1: name
                 "\"URL_TEAM_BADGE\" TEXT NOT NULL ," + // 2: urlTeamBadge
-                "\"BASE64_TEAM_BADGE\" TEXT NOT NULL );"); // 3: base64TeamBadge
+                "\"BASE64_TEAM_BADGE\" TEXT NOT NULL ," + // 3: base64TeamBadge
+                "\"STADIUM_LOCATION\" TEXT);"); // 4: stadiumLocation
     }
 
     /** Drops the underlying database table. */
@@ -63,6 +65,11 @@ public class TeamDbModelDao extends AbstractDao<TeamDbModel, Long> {
         stmt.bindString(2, entity.getName());
         stmt.bindString(3, entity.getUrlTeamBadge());
         stmt.bindString(4, entity.getBase64TeamBadge());
+ 
+        String stadiumLocation = entity.getStadiumLocation();
+        if (stadiumLocation != null) {
+            stmt.bindString(5, stadiumLocation);
+        }
     }
 
     @Override
@@ -72,6 +79,11 @@ public class TeamDbModelDao extends AbstractDao<TeamDbModel, Long> {
         stmt.bindString(2, entity.getName());
         stmt.bindString(3, entity.getUrlTeamBadge());
         stmt.bindString(4, entity.getBase64TeamBadge());
+ 
+        String stadiumLocation = entity.getStadiumLocation();
+        if (stadiumLocation != null) {
+            stmt.bindString(5, stadiumLocation);
+        }
     }
 
     @Override
@@ -91,7 +103,8 @@ public class TeamDbModelDao extends AbstractDao<TeamDbModel, Long> {
             cursor.getLong(offset + 0), // id
             cursor.getString(offset + 1), // name
             cursor.getString(offset + 2), // urlTeamBadge
-            cursor.getString(offset + 3) // base64TeamBadge
+            cursor.getString(offset + 3), // base64TeamBadge
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4) // stadiumLocation
         );
         return entity;
     }
@@ -102,6 +115,7 @@ public class TeamDbModelDao extends AbstractDao<TeamDbModel, Long> {
         entity.setName(cursor.getString(offset + 1));
         entity.setUrlTeamBadge(cursor.getString(offset + 2));
         entity.setBase64TeamBadge(cursor.getString(offset + 3));
+        entity.setStadiumLocation(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
      }
     
     @Override
