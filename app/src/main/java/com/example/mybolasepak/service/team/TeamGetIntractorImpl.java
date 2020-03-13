@@ -18,7 +18,7 @@ import retrofit2.Response;
 
 public class TeamGetIntractorImpl implements MainInterface.GetIntractor<Team> {
 
-    private static final String TAG = "EventGetIntractorImpl";
+    private static final String TAG = "TeamGetIntractorImpl";
 
     @Override
     public void getDataList(MainInterface.GetIntractor.OnFinishedListener<Team> onFinishedListener) {
