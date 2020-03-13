@@ -12,15 +12,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.mybolasepak.service.EventGetIntractorsImpl;
+import com.example.mybolasepak.service.EventPresenterImpl;
+import com.example.mybolasepak.service.MainInterface;
 import com.example.mybolasepak.service.step.StepDetector;
 import com.example.mybolasepak.service.step.StepListener;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener {
-    private StepDetector simpleStepDetector;
-    private int numSteps = 0;
+public class MainActivity extends AppCompatActivity implements SensorEventListener, StepListener, MainInterface.MainView {
 
     @BindView(R.id.step_counter)
     TextView tvStepCount;
@@ -28,6 +31,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     Button BtnStart;
     @BindView(R.id.btn_stop)
     Button BtnStop;
+
+    private StepDetector simpleStepDetector;
+    private int numSteps = 0;
+    private MainInterface.presenter presenter;
 
 
     @Override
@@ -58,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
             }
         });
+
+        presenter = new EventPresenterImpl(this, new EventGetIntractorsImpl());
+        presenter.requestDataFromServer();
     }
 
     @Override
@@ -76,5 +86,25 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void step(long timeNs) {
         numSteps++;
         tvStepCount.setText(numSteps + " Step Today");
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void setDataToRecyclerView(ArrayList DataList) {
+
+    }
+
+    @Override
+    public void onResponseFailure(Throwable throwable) {
+
     }
 }

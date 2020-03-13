@@ -2,7 +2,7 @@ package com.example.mybolasepak.service;
 
 import java.util.ArrayList;
 
-public interface MainContract {
+public interface MainInterface {
     /**
      * Call when user interact with the view and other when view OnDestroy()
      */
@@ -15,7 +15,7 @@ public interface MainContract {
 
     /**
      * showProgress() and hideProgress() would be used for displaying and hiding the progressBar
-     * while the setDataToRecyclerView and onResponseFailure is fetched from the GetNoticeInteractorImpl class
+     * while the setDataToRecyclerView and onResponseFailure is fetched from the ...IntractorImpl class
      **/
     interface MainView<T> {
         void showProgress();

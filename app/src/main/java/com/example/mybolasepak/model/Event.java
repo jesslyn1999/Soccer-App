@@ -38,6 +38,9 @@ public class Event {
     private String dateEvent;  // TT-MM-DD
     private String strTime;
 
+    private Team awayTeam;
+    private Team homeTeam;
+
     @Override
     public String toString() {
         return "Event{" +

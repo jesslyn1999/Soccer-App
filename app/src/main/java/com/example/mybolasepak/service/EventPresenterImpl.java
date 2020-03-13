@@ -1,5 +1,7 @@
 package com.example.mybolasepak.service;
 
+import android.util.Log;
+
 import com.example.mybolasepak.model.EventList;
 
 import java.util.ArrayList;
@@ -7,10 +9,11 @@ import java.util.ArrayList;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class EventPresenterImpl implements MainContract.presenter, MainContract.GetIntractor.OnFinishedListener<EventList> {
+public class EventPresenterImpl implements MainInterface.presenter, MainInterface.GetIntractor.OnFinishedListener<EventList> {
+    private static final String TAG = "EventPresenterImpl";
 
-    private MainContract.MainView<EventList> mainView;
-    private MainContract.GetIntractor getIntractor;
+    private MainInterface.MainView<EventList> mainView;
+    private MainInterface.GetIntractor getIntractor;
 
     @Override
     public void onDestroy() {
@@ -27,6 +30,7 @@ public class EventPresenterImpl implements MainContract.presenter, MainContract.
 
     @Override
     public void requestDataFromServer() {
+        Log.i(TAG, "Start Executing RequestDataFrom Server");
         getIntractor.getDataList(this);
     }
 
