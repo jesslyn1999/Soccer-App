@@ -15,4 +15,6 @@ MyBolaSepak is an Android Application to monitor soccer match and user's step co
 
 ## Application Screenshot
 
-TBD
+![Pics 1](/screenshots/pics-1.png "Tampilan utama")
+![Pics 2](/screenshots/pics-2.png "Tampilan searching for teams")
+
