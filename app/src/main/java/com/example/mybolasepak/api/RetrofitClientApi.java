@@ -20,7 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClientApi {
     private static final String TAG = "RetrofitClientApi";
 
-    private static final String SPORTDB_API_BASE_URL = "https://www.thesportsdb.com/api/";
+    private static final String SPORTDB_API_BASE_URL = "http://134.209.97.218:5050/api/";
     private static final String OPENWEATHER_API_BASE_URL = "http://api.openweathermap.org/";
     private static final String OPENWEATHER_BASE_URL = "http://openweathermap.org/";
 

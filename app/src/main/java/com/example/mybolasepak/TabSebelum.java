@@ -57,9 +57,9 @@ public class TabSebelum extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tab_sebelum, container, false);
         recyclerView = view.findViewById(R.id.list_match_sebelum);
-        adapter = new EventDetailAdapter(events);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(adapter);
+//        adapter = new EventDetailAdapter(this, events);
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+//        recyclerView.setAdapter(adapter);
 
         return view;
     }

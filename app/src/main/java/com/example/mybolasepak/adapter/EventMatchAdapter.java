@@ -25,7 +25,7 @@ public class EventMatchAdapter extends RecyclerView.Adapter<EventMatchAdapter.Ev
     @NonNull
     @Override
     public EventMatchHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_match_info, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_event_detail, parent, false);
         return new EventMatchHolder(view);
     }
 

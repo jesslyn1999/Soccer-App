@@ -1,25 +1,25 @@
 package com.example.mybolasepak.adapter;
 
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.mybolasepak.R;
+import com.example.mybolasepak.activity.EventDetail;
 import com.example.mybolasepak.database.model.EventDbModel;
 import com.example.mybolasepak.utils.LoadImage;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -29,19 +29,22 @@ import butterknife.ButterKnife;
 public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.EventDetailViewHolder> {
 
     private static final String TAG = "EventDetailAdapter";
+    private Context mcon;
+
     private List<EventDbModel> dataList;
     private List<EventDbModel> filteredDataList;
 
-    public EventDetailAdapter(List<EventDbModel> dataList) {
+    public EventDetailAdapter(Context con, List<EventDbModel> dataList) {
         this.dataList = dataList;
         filteredDataList = dataList;
+        mcon = con;
     }
 
     @NonNull
     @Override
     public EventDetailViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.fragment_match_info, parent, false);
+        View view = layoutInflater.inflate(R.layout.activity_event_detail, parent, false);
         return new EventDetailViewHolder(view);
     }
 
@@ -60,6 +63,19 @@ public class EventDetailAdapter extends RecyclerView.Adapter<EventDetailAdapter.
         holder.textNameTeamB.setText(event.getAwayTeam().getName());
         holder.scoreTeamA.setText(String.valueOf(event.getHomeScore()));
         holder.scoreTeamB.setText(String.valueOf(event.getAwayScore()));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(holder.itemView.getContext(),
+                        "Choose " + filteredDataList.get(holder.getAdapterPosition()).getHomeTeam().getName(),
+                        Toast.LENGTH_SHORT)
+                        .show();
+                Intent moveIntent = new Intent(mcon, EventDetail.class);
+                moveIntent.putExtra(EventDetail.EXTRA_EVENT_ID, filteredDataList.get(holder.getAdapterPosition()).getId());
+                mcon.startActivity(moveIntent);
+            }
+        });
     }
 
     @Override

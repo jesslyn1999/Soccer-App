@@ -8,15 +8,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -98,7 +93,7 @@ public class MainActivity extends AppCompatActivity implements MainInterface.Mai
                     Toast.LENGTH_LONG).show();
         } else {
             Log.i(TAG, "Im here : " + eventDbModelList.size());
-            adapter = new EventDetailAdapter(eventDbModelList);
+            adapter = new EventDetailAdapter(this, eventDbModelList);
             RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
             recyclerView.setLayoutManager(layoutManager);
             recyclerView.setAdapter(adapter);
@@ -137,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements MainInterface.Mai
                         }
                     }
 
-                    adapter = new EventDetailAdapter(filteredEventList);
+                    adapter = new EventDetailAdapter(MainActivity.this, filteredEventList);
                     RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
                     recyclerView.setLayoutManager(layoutManager);
                     recyclerView.setAdapter(adapter);
@@ -236,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements MainInterface.Mai
         }
 
         List<EventDbModel> eventDbModelList = daoSession.getEventDbModelDao().loadAll();
-        adapter = new EventDetailAdapter(eventDbModelList);
+        adapter = new EventDetailAdapter(this, eventDbModelList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);

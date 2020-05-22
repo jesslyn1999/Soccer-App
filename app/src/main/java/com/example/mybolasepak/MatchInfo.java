@@ -23,6 +23,6 @@ public class MatchInfo extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_match_info, container, false);
+        return inflater.inflate(R.layout.activity_event_detail, container, false);
     }
 }
